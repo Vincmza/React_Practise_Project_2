@@ -13,9 +13,18 @@ import Error from "./components/Error/index";
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
 
+import { createGlobalStyle } from 'styled-components'
+
+const GlobalStyle = createGlobalStyle`
+    * {
+      font-family: 'Trebuchet MS', Helvetica, sans-serif;
+    }
+`
+
 ReactDOM.render(
     <React.StrictMode>
         <Router>
+            <GlobalStyle/>
             <Header />
             <Routes>
                 <Route exact path="/" exact element={<Home />}></Route>
