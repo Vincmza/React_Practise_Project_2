@@ -14,12 +14,18 @@ const SurveyWrapper = styled.div`
     padding:90px;
 `
 const QuestionTitle = styled.h1`
+    margin-bottom: 50px;
     display: flex;
     justify-content:center;
     font-size: 1.3em;
     text-decoration: underline ${colors.primary}
 `
+const Question = styled.div`
+    margin-bottom: 50px;
+    font-size: 0.9em;
+`
 const Response = styled.div`
+    margin-bottom: 50px;
     display:flex;
     justify-content: space-between;
     width: 50%;
@@ -33,6 +39,15 @@ const YesOrNo = styled.span`
     align-items:center;
     justify-content:center;
 `
+const Button = styled(Link)`
+    text-decoration: underline;
+    color:black;
+`
+const ButtonContainer = styled.div`
+    display:flex;
+    justify-content: space-around;
+    width:35%;
+`
 
 
 const Survey = () => {
@@ -45,16 +60,16 @@ const Survey = () => {
         <SurveyWrapper>
             <div>
                 <QuestionTitle>Question {questionParsint}</QuestionTitle>
-                <p>Votre application doit elle impérativement apparaître en premier dans les résultats de recherche ?</p>
+                <Question>Votre application doit elle impérativement apparaître en premier dans les résultats de recherche ?</Question>
             </div>
             <Response>
                 <YesOrNo>Oui</YesOrNo>
                 <YesOrNo>Non</YesOrNo>
             </Response>
-            <div>
-                {questionNumber > 1 && <Link to={`/survey/${previousQuestion}`}>Précédent</Link>}               
-                <Link to={`/survey/${nextQuestion}`}>Suivant</Link>
-            </div>
+            <ButtonContainer>
+                {questionNumber > 1 && <Button to={`/survey/${previousQuestion}`}>Précédente</Button>}               
+                <Button to={`/survey/${nextQuestion}`}>Suivante</Button>
+            </ButtonContainer>
         </SurveyWrapper>
     );
 };
