@@ -1,12 +1,12 @@
 import React from 'react';
 /*components*/
 import {Link} from "react-router-dom"
+import { StyledLink } from '../../utils/style/Atoms';
 
 /*style*/
 import styled from 'styled-components';
 
 /*files*/
-import colors from '../../utils/style/colors';
 import HeaderLogo from "../../assests/dark-logo.png"
 
 const Nav = styled.nav`
@@ -19,19 +19,11 @@ const Logo = styled.img`
     height: 70px
 `
 const Menu = styled.div`
-    width:50%;
+    width:30%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-around;
 `
-const StyledLink = styled(Link)`
-    display: flex;
-    align-items: center;
-    padding: 5px 10px;
-    color: #8186a0;
-    text-decoration: none;
-    font-size: 1em;
-    ${props => props.$isFullLink && `color: white; border-radius: 30px; background-color: ${colors.primary};`}    
-`
+
 const Header = () => {
     return (
         <Nav>
