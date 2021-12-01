@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { useParams } from 'react-router';
 /*components*/
 import { Link } from 'react-router-dom';
+import { Loader } from '../../utils/style/Atoms'
 /*flies*/
 import colors from '../../utils/style/colors';
 
@@ -14,7 +15,7 @@ const SurveyWrapper = styled.div`
     padding:90px;
 `
 const QuestionTitle = styled.h1`
-    margin-bottom: 50px;
+    margin-bottom: 30px;
     display: flex;
     justify-content:center;
     font-size: 1.3em;
@@ -42,33 +43,69 @@ const YesOrNo = styled.span`
 const Button = styled(Link)`
     text-decoration: underline;
     color:black;
+    margin-top:20px;
+    display:flex;
+    align-items:center;
+    justify-content: center;
 `
 const ButtonContainer = styled.div`
     display:flex;
-    justify-content: space-around;
-    width:35%;
+    justify-content: space-between;
+    width:400px;
+`
+const NextAndPrev = styled.div`
+    width:50%;
+    display:flex;
+    justify-content: center;
 `
 
-
 const Survey = () => {
+    /*storing param*/
     let {questionNumber} = useParams()
+    /*make sure it is a number*/
     let questionParsint = parseInt(questionNumber)
+    /*previous button*/
     let previousQuestion = questionParsint - 1
+    /*next button*/
     let nextQuestion = questionParsint + 1
+    /*storing data from API*/
+    const [isDataLoading, setIsDataLoading] = useState(false)
+    const [questions, setQuestions] = useState({})
 
+    /*get survey data from API*/
+    useEffect(() => {
+        fetch(`http://localhost:8000/survey`)
+             .then((response) => response.json()
+             .then((surveyData) => {
+                setQuestions(surveyData.surveyData)
+                setIsDataLoading(false)
+             })
+             .catch((error) => {
+                console.log(error)
+                setIsDataLoading(true)
+             })
+         )
+     }, [])
+     console.log(questions)
     return (
         <SurveyWrapper>
             <div>
-                <QuestionTitle>Question {questionParsint}</QuestionTitle>
-                <Question>Votre application doit elle impérativement apparaître en premier dans les résultats de recherche ?</Question>
+                <QuestionTitle>Question {questionParsint}</QuestionTitle>               
             </div>
+            {isDataLoading ? ( 
+                <Loader/>
+            ) : (<Question>{questions[questionParsint]}</Question>)}
             <Response>
                 <YesOrNo>Oui</YesOrNo>
                 <YesOrNo>Non</YesOrNo>
             </Response>
             <ButtonContainer>
-                {questionNumber > 1 && <Button to={`/survey/${previousQuestion}`}>Précédente</Button>}               
-                <Button to={`/survey/${nextQuestion}`}>Suivante</Button>
+                <NextAndPrev>
+                    {questionNumber > 1 && <Button to={`/survey/${previousQuestion}`}>Précédente</Button>}
+                </NextAndPrev>
+                <NextAndPrev>            
+                    {questionParsint < 6 ? <Button to={`/survey/${nextQuestion}`}>Suivante</Button> : <Button to="/results">Résultats</Button> }
+                </NextAndPrev>                               
             </ButtonContainer>
         </SurveyWrapper>
     );
