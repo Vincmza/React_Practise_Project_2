@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import DefaultPicture from '../../assests/profile.png'
 
 /*components*/
@@ -8,28 +8,28 @@ import Card from '../../components/Card';
 import styled from 'styled-components';
 import colors from '../../utils/style/colors';
  
-const freelanceProfiles = [
-    {
-        name: 'Jane Doe',
-        jobTitle: 'Devops',
-        picture: DefaultPicture,
-    },
-    {
-        name: 'John Doe',
-        jobTitle: 'Developpeur frontend',
-        picture: DefaultPicture,
-    },
-    {
-        name: 'Jeanne Biche',
-        jobTitle: 'Développeuse Fullstack',
-        picture: DefaultPicture,
-    },
-    {
-        name: 'Emmanuel Macron',
-        jobTitle: 'Enculeur de mouches',
-        picture: DefaultPicture
-    }
-]
+// const freelanceProfiles = [
+//     {
+//         name: 'Jane Doe',
+//         jobTitle: 'Devops',
+//         picture: DefaultPicture,
+//     },
+//     {
+//         name: 'John Doe',
+//         jobTitle: 'Developpeur frontend',
+//         picture: DefaultPicture,
+//     },
+//     {
+//         name: 'Jeanne Biche',
+//         jobTitle: 'Développeuse Fullstack',
+//         picture: DefaultPicture,
+//     },
+//     {
+//         name: 'Emmanuel Macron',
+//         jobTitle: 'Enculeur de mouches',
+//         picture: DefaultPicture
+//     }
+// ]
 const CardWrapper = styled.div`
     display:flex;
     flex-direction:column;
@@ -52,15 +52,27 @@ const FreelanceSentence = styled.p`
 `
 
 function Freelances() {
+    const [profiles, setProfiles]=useState([])
+
+    useEffect(()=>{
+        fetch(`http://localhost:8000/freelances`)
+        .then((response)=> response.json())
+        .then(profiles => setProfiles(profiles.freelancersList))
+        .catch(error=>{
+            console.log(error)
+        })            
+    }, [])
+    console.log(profiles)
+
     return (
         <CardWrapper>
             <FreelanceTitle>Trouver votre prestataire</FreelanceTitle>
             <FreelanceSentence>Chez Shiny nous réunissons les meilleurs profils pour vous</FreelanceSentence>
             <CardContainer>
-            {freelanceProfiles.map((profile, index) => (
+            {profiles.map((profile, index) => (
                 <Card
                     key={`${profile.name}-${index}`}
-                    label={profile.jobTitle}
+                    label={profile.job}
                     picture={profile.picture}
                     title={profile.name}
                 />

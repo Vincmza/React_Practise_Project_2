@@ -86,7 +86,6 @@ const Survey = () => {
              })
          )
      }, [])
-     console.log(questions)
     return (
         <SurveyWrapper>
             <div>
