@@ -6,13 +6,7 @@ import Card from '../../components/Card';
 
 /*style*/
 import styled from 'styled-components';
-
-const CardsContainer = styled.div`
-    display: grid;
-    gap: 24px;
-    grid-template-rows: 350px 350px;
-    grid-template-columns: repeat(2, 1fr);
-`
+import colors from '../../utils/style/colors';
  
 const freelanceProfiles = [
     {
@@ -30,12 +24,39 @@ const freelanceProfiles = [
         jobTitle: 'Développeuse Fullstack',
         picture: DefaultPicture,
     },
+    {
+        name: 'Emmanuel Macron',
+        jobTitle: 'Enculeur de mouches',
+        picture: DefaultPicture
+    }
 ]
+const CardWrapper = styled.div`
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+`
+const CardContainer = styled.div`
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 50%;
+`
+const FreelanceTitle = styled.h1`
+    font-size:1.3em;
+    margin-bottom:50px;
+`
+const FreelanceSentence = styled.p`
+    font-size:0.9em;
+    margin-bottom:50px;
+    color: ${colors.secondary}
+`
 
 function Freelances() {
     return (
-        <CardsContainer>
-            <h1>Freelances 👩‍💻👨‍💻👩‍💻</h1>
+        <CardWrapper>
+            <FreelanceTitle>Trouver votre prestataire</FreelanceTitle>
+            <FreelanceSentence>Chez Shiny nous réunissons les meilleurs profils pour vous</FreelanceSentence>
+            <CardContainer>
             {freelanceProfiles.map((profile, index) => (
                 <Card
                     key={`${profile.name}-${index}`}
@@ -44,7 +65,9 @@ function Freelances() {
                     title={profile.name}
                 />
             ))}
-        </CardsContainer>
+            </CardContainer>
+            
+        </CardWrapper>
     )
 }
 export default Freelances;

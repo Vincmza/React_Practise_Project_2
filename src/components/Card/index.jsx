@@ -11,10 +11,13 @@ import colors from '../../utils/style/colors';
 const CardWrapper = styled.div`
     display: flex;
     flex-direction: column;
+    align-items: center;
     padding: 15px;
+    margin-bottom: 80px;
     background-color: ${colors.backgroundLight};
     border-radius: 30px;
     width: 350px;
+    height:350px
     transition: 200ms;
     &:hover {
         cursor: pointer;
@@ -24,13 +27,17 @@ const CardWrapper = styled.div`
 
 const CardLabel = styled.span`
     color: #5843e4;
-    font-size: 22px;
-    font-weight: bold;
+    font-size: 1em;
+    margin-bottom:30px;
+    width:50%;
 `
 const CardImage = styled.img`
-    height: 80px;
-    width: 80px;
+    height: 150px;
+    width: 150px;
     border-radius: 50%;
+`
+const Title = styled.span`
+    margin-top:30px;
 `
 
 function Card({ label, title, picture }) {
@@ -38,7 +45,7 @@ function Card({ label, title, picture }) {
         <CardWrapper>
             <CardLabel>{label}</CardLabel>
             <CardImage src={picture} alt="freelance"/>
-            <span>{title}</span>
+            <Title>{title}</Title>
         </CardWrapper>
     )
 }
