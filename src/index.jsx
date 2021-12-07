@@ -10,29 +10,31 @@ import Survey from "./pages/Survey/index";
 import Results from "./pages/Results/index"
 import Freelances from "./pages/Freelances/index";
 import Error from "./components/Error/index";
+import Footer from "./components/Footer/index";
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
+import GlobalStyle from "./utils/style/GlobalStyle"
+import { ThemeProvider } from "./utils/context/index";
+import {SurveyProvider} from "./utils/context/index"
 
-import { createGlobalStyle } from 'styled-components'
-
-const GlobalStyle = createGlobalStyle`
-    * {
-      font-family: 'Trebuchet MS', Helvetica, sans-serif;
-    }
-`
 
 ReactDOM.render(
     <React.StrictMode>
         <Router>
-            <GlobalStyle/>
-            <Header />
-            <Routes>
-                <Route exact path="/" exact element={<Home />}></Route>
-                <Route exact path="/survey/:questionNumber" exact element={<Survey />}></Route>
-                <Route exact path="/results" exact element={<Results/>}/>
-                <Route exact path="/freelances" exact element={<Freelances/>}/>
-                <Route path="*" element={<Error/>}/>
-            </Routes>
+            <ThemeProvider>
+                <SurveyProvider>
+                    <GlobalStyle/>
+                    <Header />
+                    <Routes>
+                        <Route exact path="/" exact element={<Home />}></Route>
+                        <Route exact path="/survey/:questionNumber" exact element={<Survey />}></Route>
+                        <Route exact path="/results" exact element={<Results/>}/>
+                        <Route exact path="/freelances" exact element={<Freelances/>}/>
+                        <Route path="*" element={<Error/>}/>
+                    </Routes>
+                    <Footer/>
+                </SurveyProvider>
+            </ThemeProvider>
         </Router>
     </React.StrictMode>,
     document.getElementById("root")

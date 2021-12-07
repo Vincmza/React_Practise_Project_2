@@ -7,29 +7,7 @@ import Card from '../../components/Card';
 /*style*/
 import styled from 'styled-components';
 import colors from '../../utils/style/colors';
- 
-// const freelanceProfiles = [
-//     {
-//         name: 'Jane Doe',
-//         jobTitle: 'Devops',
-//         picture: DefaultPicture,
-//     },
-//     {
-//         name: 'John Doe',
-//         jobTitle: 'Developpeur frontend',
-//         picture: DefaultPicture,
-//     },
-//     {
-//         name: 'Jeanne Biche',
-//         jobTitle: 'Développeuse Fullstack',
-//         picture: DefaultPicture,
-//     },
-//     {
-//         name: 'Emmanuel Macron',
-//         jobTitle: 'Enculeur de mouches',
-//         picture: DefaultPicture
-//     }
-// ]
+
 const CardWrapper = styled.div`
     display:flex;
     flex-direction:column;
