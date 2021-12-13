@@ -31,7 +31,7 @@ const Header = () => {
             <Menu>
                 <StyledLink to="/">Accueil</StyledLink>
                 <StyledLink to="/freelances">Profils</StyledLink>
-                <StyledLink to="/survey/42" $isFullLink>Faire le test</StyledLink>
+                <StyledLink to="/survey/1" $isFullLink>Faire le test</StyledLink>
                 {/* <StyledLink to="/results">Résultats</StyledLink>            */}
             </Menu>
         </Nav>
