@@ -53,7 +53,7 @@ const LoaderWrapper = styled.div`
   justify-content: center;
 `
 
-function formatFetchParams(answers) {
+ export function formatFetchParams(answers) {
   const answerNumbers = Object.keys(answers)
   return answerNumbers.reduce((previousParams, answerNumber, index) => {
     const isFirstParam = index === 0
@@ -62,6 +62,9 @@ function formatFetchParams(answers) {
   }, '')
 }
 
+export function somme (a,b){
+  return a > 0 && b > 0 ? a + b : null
+}
 
 export function formatJobList(title, listLength, index) {
   if (index === listLength - 1) {
